@@ -1,0 +1,445 @@
+mysql> create database college;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use college;
+Database changed
+mysql> CREATE TABLE student (
+    ->     student_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name        VARCHAR(100) NOT NULL,
+    ->     email       VARCHAR(100) UNIQUE,
+    ->     dob         DATE,
+    ->     gender      ENUM('Male','Female','Other'),
+    ->     join_date   DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 7
+mysql> CREATE TABLE students (
+    ->     student_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name        VARCHAR(100) NOT NULL,
+    ->     email       VARCHAR(100) UNIQUE,
+    ->     dob         DATE,
+    ->     gender      ENUM('Male','Female','Other'),
+    ->     join_date   DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 7
+mysql> CREATE TABLE stud (
+    ->     student_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name        VARCHAR(100) NOT NULL,
+    ->     email       VARCHAR(100) UNIQUE,
+    ->     dob         DATE,
+    ->     gender      ENUM('Male','Female','Other'),
+    ->     join_date   DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 7
+mysql> 
+mysql> 
+mysql> 
+mysql> CREATE TABLE studs (
+    ->     student_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name        VARCHAR(100) NOT NULL,
+    ->     email       VARCHAR(100) UNIQUE,
+    ->     dob         DATE,
+    ->     gender      ENUM('Male','Female','Other'),
+    ->     join_date   DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 7
+mysql> 
+mysql> CREATE TABLE studs (
+    ->     studs_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name        VARCHAR(100) NOT NULL,
+    ->     email       VARCHAR(100) UNIQUE,
+    ->     dob         DATE,
+    ->     gender      ENUM('Male','Female','Other'),
+    ->     join_date   DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 7
+mysql> CREATE TABLE studs (
+    ->     studs_id   INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name       VARCHAR(100) NOT NULL,
+    ->     email      VARCHAR(100) UNIQUE,
+    ->     dob        DATE,
+    ->     gender     ENUM('Male','Female','Other'),
+    ->     join_date  DATE DEFAULT (CURRENT_DATE)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE course (
+    ->     course_id   INT AUTO_INCREMENT PRIMARY KEY,
+    ->     course_name VARCHAR(100) NOT NULL,
+    ->     description TEXT,
+    ->     credits     INT  CHECK (credits > 0),
+    ->     fee         DECIMAL(8,2) CHECK (fee >= 0)   -- needed for Task 3
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO student (name,email,dob,gender,join_date) VALUES('Manoj','manoj@college.edu','2001-07-12','Male','2024-09-21');
+ERROR 1146 (42S02): Table 'college.student' doesn't exist
+mysql> INSERT INTO studs VALUES('Manoj','manoj@college.edu','2001-07-12','Male','2024-09-21');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO studs VALUES('Manoj','manoj@college.edu','2001-07-12','Male','2024-09-21');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO studs VALUES(1,'Manoj','manoj@college.edu','2001-07-12','Male','2024-09-21');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO studs VALUES(2,'Maha','maha@college.edu','2002-05-10','Female','2023-01-29');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO studs VALUES(3,'Sharmi',Sharmi@college.edu','2003-08-13','Female','2022-01-17');
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@college.edu','2003-08-13','Female','2022-01-17');
+'' at line 1
+mysql> INSERT INTO studs VALUES(3,'Sharmi','Sharmi@college.edu','2003-08-13','Female','2022-01-17');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO studs VALUES(4,'Rakshan','Rakshan@college.edu','2004-05-20','Male','2020-09-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO studs VALUES(5,'Varshni','Varshni@college.edu','2005-07-10','Female','2024-03-30');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO course VALUES(101,'Computer Science','Intro to networking principles',3,4500.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO course VALUES(102,'Software engineering','SDLC & Project work',4,2900.00);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO course VALUES(103,'Data Systems','Relational theory & SQL',4,5950.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO course VALUES(104,'Data Structures','Algorithms & implementation',3,5200.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO course VALUES(105,'Operating Systems','Processes,Concurrency,memory',4,3500.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studs;
++----------+---------+---------------------+------------+--------+------------+
+| studs_id | name    | email               | dob        | gender | join_date  |
++----------+---------+---------------------+------------+--------+------------+
+|        1 | Manoj   | manoj@college.edu   | 2001-07-12 | Male   | 2024-09-21 |
+|        2 | Maha    | maha@college.edu    | 2002-05-10 | Female | 2023-01-29 |
+|        3 | Sharmi  | Sharmi@college.edu  | 2003-08-13 | Female | 2022-01-17 |
+|        4 | Rakshan | Rakshan@college.edu | 2004-05-20 | Male   | 2020-09-01 |
+|        5 | Varshni | Varshni@college.edu | 2005-07-10 | Female | 2024-03-30 |
++----------+---------+---------------------+------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from course;
++-----------+----------------------+--------------------------------+---------+---------+
+| course_id | course_name          | description                    | credits | fee     |
++-----------+----------------------+--------------------------------+---------+---------+
+|       101 | Computer Science     | Intro to networking principles |       3 | 4500.00 |
+|       102 | Software engineering | SDLC & Project work            |       4 | 2900.00 |
+|       103 | Data Systems         | Relational theory & SQL        |       4 | 5950.00 |
+|       104 | Data Structures      | Algorithms & implementation    |       3 | 5200.00 |
+|       105 | Operating Systems    | Processes,Concurrency,memory   |       4 | 3500.00 |
++-----------+----------------------+--------------------------------+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE course
+    ->    SET fee = 5500.00
+    ->  WHERE course_name = 'Data Structures';   -- or use course_id = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> create database library;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use library;
+Database changed
+mysql> CREATE TABLE books (
+    ->     book_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     title    VARCHAR(150) NOT NULL,
+    ->     author   VARCHAR(100) NOT NULL,
+    ->     genre    VARCHAR(50),
+    ->     year_pub INT CHECK (year_pub BETWEEN 1500 AND YEAR(CURDATE())),
+    ->     status   ENUM('Available','Issued') DEFAULT 'Available'
+    -> );CREATE TABLE books (
+ERROR 3814 (HY000): An expression of a check constraint 'books_chk_1' contains disallowed function: curdate.
+    ->     book_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     title    VARCHAR(150) NOT NULL,
+    ->     author   VARCHAR(100) NOT NULL,
+    ->     genre    VARCHAR(50),
+    ->     year_pub INT CHECK (year_pub BETWEEN 1500 AND 2100),
+    ->     status   ENUM('Available','Issued') DEFAULT 'Available'
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE members (
+    ->     member_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name       VARCHAR(100) NOT NULL,
+    ->     email      VARCHAR(100) UNIQUE,
+    ->     phone      VARCHAR(15),
+    ->     join_date  DATE DEFAULT CURRENT_DATE
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE
+)' at line 6
+mysql> CREATE TABLE members (
+    ->     member_id  INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name       VARCHAR(100) NOT NULL,
+    ->     email      VARCHAR(100) UNIQUE,
+    ->     phone      VARCHAR(15),
+    ->     join_date  DATE DEFAULT (CURRENT_DATE)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> 
+mysql> 
+mysql> CREATE TABLE loans (
+    ->     loan_id     INT AUTO_INCREMENT PRIMARY KEY,
+    ->     book_id     INT,
+    ->     member_id   INT,
+    ->     issue_date  DATE DEFAULT CURRENT_DATE,
+    ->     due_date    DATE,
+    ->     return_date DATE,
+    ->     CONSTRAINT fk_loan_book   FOREIGN KEY (book_id)   REFERENCES books(book_id),
+    ->     CONSTRAINT fk_loan_member FOREIGN KEY (member_id) REFERENCES members(member_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE,
+    due_date    DATE,
+    return_date DATE,
+    CONSTRAINT fk_loan' at line 5
+mysql> CREATE TABLE loans (
+    ->     loan_id     INT AUTO_INCREMENT PRIMARY KEY,
+    ->     book_id     INT,
+    ->     member_id   INT,
+    ->     issue_date  DATE DEFAULT CURRENT_DATE,
+    ->     due_date    DATE,
+    ->     return_date DATE,
+    ->     CONSTRAINT fk_loan_book   FOREIGN KEY (book_id)   REFERENCES books(book_id),
+    ->     CONSTRAINT fk_loan_member FOREIGN KEY (member_id) REFERENCES members(member_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE,
+    due_date    DATE,
+    return_date DATE,
+    CONSTRAINT fk_loan' at line 5
+mysql> DROP TABLE IF EXISTS loans;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> CREATE TABLE loans (
+    ->     loan_id     INT AUTO_INCREMENT PRIMARY KEY,
+    ->     book_id     INT,
+    ->     member_id   INT,
+    ->     issue_date  DATETIME DEFAULT CURRENT_TIMESTAMP,   -- always valid
+    ->     due_date    DATE,
+    ->     return_date DATE,
+    ->     CONSTRAINT fk_loan_book
+    ->         FOREIGN KEY (book_id)   REFERENCES books(book_id)
+    ->         ON DELETE CASCADE,
+    ->     CONSTRAINT fk_loan_member
+    ->         FOREIGN KEY (member_id) REFERENCES members(member_id)
+    ->         ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into books values(1,'1984','George Orwell','Dytopian',1949,'Available');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into books values(2,'The Alchemist','Paulo Coelho','Fiction',1988,'Available');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into books values(3,'Harry Potter','J.K.Rowling','Adventure',1997,'Issued');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into members values(1,'Senthil','Senthil@example.com',9388746754,'2023-05-12');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into members values(2,'Madhu','madhu@example.com',6385366420,'2021-01-10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into members values(3,'Sujith','Sujith@example.com',9952683015,'2020-05-20');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO loans (book_id,member_id,issue_date,due_date,return_date) VALUES
+    ->   (2,1,'2025-06-15','2025-07-15',NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from books;
++---------+---------------+---------------+-----------+----------+-----------+
+| book_id | title         | author        | genre     | year_pub | status    |
++---------+---------------+---------------+-----------+----------+-----------+
+|       1 | 1984          | George Orwell | Dytopian  |     1949 | Available |
+|       2 | The Alchemist | Paulo Coelho  | Fiction   |     1988 | Available |
+|       3 | Harry Potter  | J.K.Rowling   | Adventure |     1997 | Issued    |
++---------+---------------+---------------+-----------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from members;
++-----------+---------+---------------------+------------+------------+
+| member_id | name    | email               | phone      | join_date  |
++-----------+---------+---------------------+------------+------------+
+|         1 | Senthil | Senthil@example.com | 9388746754 | 2023-05-12 |
+|         2 | Madhu   | madhu@example.com   | 6385366420 | 2021-01-10 |
+|         3 | Sujith  | Sujith@example.com  | 9952683015 | 2020-05-20 |
++-----------+---------+---------------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from loans;
++---------+---------+-----------+---------------------+------------+-------------+
+| loan_id | book_id | member_id | issue_date          | due_date   | return_date |
++---------+---------+-----------+---------------------+------------+-------------+
+|       1 |       2 |         1 | 2025-06-15 00:00:00 | 2025-07-15 | NULL        |
++---------+---------+-----------+---------------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> create database company;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use company;
+Database changed
+mysql> CREATE TABLE department (
+    ->     dept_id   INT AUTO_INCREMENT PRIMARY KEY,
+    ->     dept_name VARCHAR(100) NOT NULL,
+    ->     location  VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE employee (
+    ->     emp_id    INT AUTO_INCREMENT PRIMARY KEY,
+    ->     dept_id   INT,
+    ->     name      VARCHAR(100) NOT NULL,
+    ->     email     VARCHAR(100) UNIQUE,
+    ->     job_title VARCHAR(100),
+    ->     salary    DECIMAL(10,2) CHECK (salary > 0),
+    ->     CONSTRAINT fk_emp_dept FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into employee values(1,'Aishu','aisha@corp.com','Web Development',190000.00);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into department values(1,'Engineering','Software Enginner');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into department values(1,'Engineering','Mumbai');
+ERROR 1062 (23000): Duplicate entry '1' for key 'department.PRIMARY'
+mysql> alter table department where rename Software Engineer to location ='Mumbai';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where rename Software Engineer to location ='Mumbai'' at line 1
+mysql> CREATE TABLE employee (
+    ->     emp_id    INT AUTO_INCREMENT PRIMARY KEY,
+    ->     dept_id   INT,
+    ->     name      VARCHAR(100) NOT NULL,
+    ->     email     VARCHAR(100) UNIQUE,
+    ->     job_title VARCHAR(100),
+    ->     salary    DECIMAL(10,2) CHECK (salary > 0),
+    ->     CONSTRAINT fk_emp_dept FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+    -> );
+ERROR 1050 (42S01): Table 'employee' already exists
+mysql> UPDATE department
+    -> SET location = 'Mumbai'
+    -> WHERE dept_name = 'Software Engineer';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> insert into department values(2,'Finance','Chennai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into department values(3,'Human Resources','Bangalore');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into department values(1,101,'Vaishu','vaishu@corp.com','Tech Lead',19000.00);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee values(1,101,'Vaishu','vaishu@corp.com','Tech Lead',19000.00);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`employee`, CONSTRAINT `fk_emp_dept` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`))
+mysql> INSERT INTO employee
+    -> VALUES (1, 101, 'Vaishu', 'vaishu@corp.com', 'Tech Lead', 19000.00);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`company`.`employee`, CONSTRAINT `fk_emp_dept` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`))
+mysql> FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+    -> 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY (dept_id) REFERENCES department(dept_id)' at line 1
+mysql> FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+    -> 
+    -> 
+    -> commit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+
+
+commit' at line 1
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;
+mysql> CREATE TABLE Student (
+    ->     student_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     age INT
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE Course (
+    ->     course_id INT PRIMARY KEY,
+    ->     course_name VARCHAR(100),
+    ->     fee DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Student VALUES(1,'Manoj',19);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Student VALUES(2,'Ram',21);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student VALUES(3,'Prabhu',20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Course VALUES(101,'Cloud computing',5500);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO Course VALUES(102,'Java Programming',4000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Course VALUES(103,'Full Stack Development',4500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------------+--------+------+
+| student_id | name   | age  |
++------------+--------+------+
+|          1 | Manoj  |   19 |
+|          2 | Ram    |   21 |
+|          3 | Prabhu |   20 |
++------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Course;
++-----------+------------------------+---------+
+| course_id | course_name            | fee     |
++-----------+------------------------+---------+
+|       101 | Cloud computing        | 5500.00 |
+|       102 | Java Programming       | 4000.00 |
+|       103 | Full Stack Development | 4500.00 |
++-----------+------------------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE Course SET fee = 5500 WHERE course_id = 101;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from student;
++------------+--------+------+
+| student_id | name   | age  |
++------------+--------+------+
+|          1 | Manoj  |   19 |
+|          2 | Ram    |   21 |
+|          3 | Prabhu |   20 |
++------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Course;
++-----------+------------------------+---------+
+| course_id | course_name            | fee     |
++-----------+------------------------+---------+
+|       101 | Cloud computing        | 5500.00 |
+|       102 | Java Programming       | 4000.00 |
+|       103 | Full Stack Development | 4500.00 |
++-----------+------------------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;

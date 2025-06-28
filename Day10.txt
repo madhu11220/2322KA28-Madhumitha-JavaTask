@@ -1,0 +1,73 @@
+mysql> use stdsc;
+Database changed
+mysql> CREATE TABLE Enrollment (
+    ->     enrollment_id INT PRIMARY KEY,
+    ->     student_id INT,
+    ->     course_id INT,
+    ->     enrollment_date DATE
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Employee (
+    ->     emp_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     department VARCHAR(50),
+    ->     salary DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Enrollment VALUES(201,1,101,'2023-04-02');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Enrollment VALUES(202,2,102,'2022-05-03');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Enrollment VALUES(203,3,103,'2023-08-07');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES(1,'Ram','HR',42000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES(2,'Prabhu','IT',50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Employee VALUES(3,'Mano','Finance',54000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT course_id, COUNT(student_id) AS student_count
+    -> FROM Enrollment
+    -> GROUP BY course_id;
++-----------+---------------+
+| course_id | student_count |
++-----------+---------------+
+|       101 |             1 |
+|       102 |             1 |
+|       103 |             1 |
++-----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT department, AVG(salary) AS avg_salary
+    -> FROM Employee
+    -> GROUP BY department;
++------------+--------------+
+| department | avg_salary   |
++------------+--------------+
+| HR         | 42000.000000 |
+| IT         | 50000.000000 |
+| Finance    | 54000.000000 |
++------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT MAX(salary) AS max_salary, MIN(salary) AS min_salary
+    -> FROM Employee;
++------------+------------+
+| max_salary | min_salary |
++------------+------------+
+|   54000.00 |   42000.00 |
++------------+------------+
+1 row in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;

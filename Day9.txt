@@ -1,0 +1,169 @@
+mysql> use stdsc;
+Database changed
+mysql> CREATE TABLE Book (
+    ->     book_id INT PRIMARY KEY,
+    ->     title VARCHAR(100),
+    ->     author VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Member (
+    ->     member_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     email VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Loan (
+    ->     loan_id INT PRIMARY KEY,
+    ->     book_id INT,
+    ->     member_id INT,
+    ->     loan_date DATE,
+    ->     return_date DATE,
+    ->     FOREIGN KEY (book_id) REFERENCES Book(book_id),
+    ->     FOREIGN KEY (member_id) REFERENCES Member(member_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO Book VALUES(1,'Harry Potter','J.K.Rowling');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Book VALUES(2,'The Kill a Mockinbird','Harper Lee');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Book VALUES(3,'The birds Sanctuary','Sarojini Naidu');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Member VALUES(1,'Ram','ram@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Member VALUES(2,'Arun','arun@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Member VALUES(3,'Suji','suji@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Loan VALUES(101,1,1,'2023-03-29','2022-04-12');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Loan VALUES(102,2,2,'2022-07-12','2020-03-10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Loan VALUES(103,3,3,'2021-02-09','2022-02-18');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Book;
++---------+-----------------------+----------------+
+| book_id | title                 | author         |
++---------+-----------------------+----------------+
+|       1 | Harry Potter          | J.K.Rowling    |
+|       2 | The Kill a Mockinbird | Harper Lee     |
+|       3 | The birds Sanctuary   | Sarojini Naidu |
++---------+-----------------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Member;
++-----------+------+----------------+
+| member_id | name | email          |
++-----------+------+----------------+
+|         1 | Ram  | ram@gmail.com  |
+|         2 | Arun | arun@gmail.com |
+|         3 | Suji | suji@gmail.com |
++-----------+------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Loan;
++---------+---------+-----------+------------+-------------+
+| loan_id | book_id | member_id | loan_date  | return_date |
++---------+---------+-----------+------------+-------------+
+|     101 |       1 |         1 | 2023-03-29 | 2022-04-12  |
+|     102 |       2 |         2 | 2022-07-12 | 2020-03-10  |
+|     103 |       3 |         3 | 2021-02-09 | 2022-02-18  |
++---------+---------+-----------+------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Staff (
+    ->     staff_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     role VARCHAR(50),
+    ->     email VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Library (
+    ->     library_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     location VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Staff VALUES(1001,'Gokila','Manager',golika@gmail.com');
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@gmail.com');
+'' at line 1
+mysql> INSERT INTO Staff VALUES(1001,'Gokila','Manager','golika@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Staff VALUES(1002,'Mano','Clerk','mona@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Staff VALUES(1003,'Sujith','SalesMan','sujith@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Library VALUES(201,'Sita','Mumbai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Library VALUES(202,'Manoj','Chennai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Library VALUES(203,'Rakshan','Bangalore');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Staff;
++----------+--------+----------+------------------+
+| staff_id | name   | role     | email            |
++----------+--------+----------+------------------+
+|     1001 | Gokila | Manager  | golika@gmail.com |
+|     1002 | Mano   | Clerk    | mona@gmail.com   |
+|     1003 | Sujith | SalesMan | sujith@gmail.com |
++----------+--------+----------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Library;
++------------+---------+-----------+
+| library_id | name    | location  |
++------------+---------+-----------+
+|        201 | Sita    | Mumbai    |
+|        202 | Manoj   | Chennai   |
+|        203 | Rakshan | Bangalore |
++------------+---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Marks WHERE score > 80;
+ERROR 1146 (42S02): Table 'stdsc.marks' doesn't exist
+mysql> SELECT * FROM stdsc WHERE score > 80;
+ERROR 1146 (42S02): Table 'stdsc.stdsc' doesn't exist
+mysql> SELECT * FROM Course ORDER BY fee ASC;
++-----------+------------------------+---------+
+| course_id | course_name            | fee     |
++-----------+------------------------+---------+
+|       102 | Java Programming       | 4000.00 |
+|       103 | Full Stack Development | 4500.00 |
+|       101 | Cloud computing        | 5500.00 |
++-----------+------------------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Book WHERE title LIKE '%Java%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Book WHERE title LIKE '%Java Programming%';
+Empty set (0.00 sec)
+
+mysql> SELECT course_id, COUNT(student_id) AS student_count
+    -> FROM Enrollment
+    -> GROUP BY course_id;
+ERROR 1146 (42S02): Table 'stdsc.enrollment' doesn't exist
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;
